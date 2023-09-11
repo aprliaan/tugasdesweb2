@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalkulator Cantik</title>
+    <style>
+        /* Style start */
+        body {
+            font-family: Georgia, sans-serif;
+            background-color: #f2f2f2;
+            background-image: url('awan.jpg'); 
+            background-size: cover;
+        }
+
+        #calculator {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-image: url('latar.jpg'); 
+            background-size: cover; 
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+            opacity: 0.52;
+            
+        }
+
+        #result {
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #040404;
+            border-radius: 3px;
+            color: black;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+            color: black;
+        }
+
+        .button {
+            height: 50px;
+            font-size: 18px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            border: 1px solid #100e0e;
+            border-radius: 3px;
+            color: black;
+        }
+
+        .button:hover {
+            background-color: #ccc;
+        }
+
+        .symbol-button {
+            grid-row: span 2; 
+        }
+        .clear-button {
+            grid-column: span 2; 
+        }
+        .name {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+            
+        }
+        /* style end */
+    </style>
+
+</head>
+<body>
+    <div id="calculator">
+        <h2 id="name">Lia Kalkulator </h2>
+        <div id="result">0</div>
+        <div class="button-container">
+            <!-- Tombol simbol sisi kiri start -->
+            <div class="button symbol-button" onclick="appendToResult('+')">+</div>
+            <div class="button symbol-button" onclick="appendToResult('-')">-</div>
+            <div class="button symbol-button" onclick="appendToResult('*')">*</div>
+            <div class="button symbol-button" onclick="clearResult()">C</div>
+            <!-- Tombol simbol sisi kiri end -->
+
+            <!-- Tombol angka start-->
+            <div class="button" onclick="appendToResult('7')">7</div>
+            <div class="button" onclick="appendToResult('8')">8</div>
+            <div class="button" onclick="appendToResult('9')">9</div>
+            <div class="button" onclick="appendToResult('/')">/</div>
+            <div class="button" onclick="appendToResult('4')">4</div>
+            <div class="button" onclick="appendToResult('5')">5</div>
+            <div class="button" onclick="appendToResult('6')">6</div>
+            <div class="button" onclick="appendToResult('.')">.</div>
+            <div class="button" onclick="appendToResult('1')">1</div>
+            <div class="button" onclick="appendToResult('2')">2</div>
+            <div class="button" onclick="appendToResult('3')">3</div>
+            <div class="button" onclick="appendToResult('0')">0</div>
+            <div class="button" onclick="deleteLastCharacter()">AC</div>
+            <div class="button" onclick="calculatePercentage()">%</div>
+            <div class="button clear-button" onclick="calculateResult()">=</div>
+            <!-- Tombol angka end -->
+        </div>
+    </div>
+
+    <script>
+        // Js Start
+        let currentResult = '';
+        const resultDisplay = document.getElementById('result');
+
+        function appendToResult(value) {
+            currentResult += value;
+            resultDisplay.textContent = currentResult;
+        }
+
+        function clearResult() {
+            currentResult = '';
+            resultDisplay.textContent = '0';
+        }
+
+        function calculateResult() {
+            try {
+                currentResult = eval(currentResult);
+                resultDisplay.textContent = currentResult;
+            } catch (error) {
+                resultDisplay.textContent = 'Error';
+            }
+        }
+
+        function calculatePercentage() {
+            try {
+                currentResult = eval(currentResult + '/100');
+                resultDisplay.textContent = currentResult;
+            } catch (error) {
+                resultDisplay.textContent = 'Error';
+            }
+        }
+
+        function deleteLastCharacter() {
+            currentResult = currentResult.slice(0, -1); 
+            resultDisplay.textContent = currentResult;
+        }
+        // Js end
+    </script>
+</body>
+</html>
